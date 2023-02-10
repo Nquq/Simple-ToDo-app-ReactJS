@@ -26,23 +26,23 @@ const data = [
 ];
 
 function App() {
-	const [todos, setToDo] = useState(data);
+	const [todos, setToDos] = useState(data);
 
 	const changeToDo = id => {
 		const copy = [...todos];
 		const current = copy.find(t => t.id === id);
 		current.isCompleted = !current.isCompleted;
-		setToDo(copy);
+		setToDos(copy);
 	};
 
 	const removeToDo = id => {
-		setToDo([...todos].filter(t => t.id !== id));
+		setToDos([...todos].filter(t => t.id !== id));
 	};
 
 	return (
 		<div className=' w-4/5 mx-auto h-screen text-white'>
 			<h1 className=' text-lg mb-2 text-center font-bold'>ToDo App</h1>
-			<ToDoInput setToDo={setToDo} todos={todos} />
+			<ToDoInput setToDo={setToDos} todos={todos} />
 			<ToDoList todos={todos} changeToDo={changeToDo} removeToDo={removeToDo} />
 		</div>
 	);
