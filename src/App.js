@@ -1,25 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import ToDoInput from './components/ToDoInput';
+import ToDoList from './components/ToDoList';
+
+const data = [
+	{
+		id: 121212,
+		title: 'Приготовить еды',
+		isCompleted: false,
+	},
+	{
+		id: 12122312,
+		title: 'Купить macbook',
+		isCompleted: false,
+	},
+	{
+		id: 121545212,
+		title: 'Убрать в квартире',
+		isCompleted: false,
+	},
+	{
+		id: 12154521342,
+		title: 'Зайти в магазин',
+		isCompleted: false,
+	},
+];
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [todos, setToDo] = useState(data);
+
+	const changeToDo = id => {
+		const copy = [...todos];
+		const current = copy.find(t => t.id === id);
+		current.isCompleted = !current.isCompleted;
+		setToDo(copy);
+	};
+
+	const removeToDo = id => {
+		setToDo([...todos].filter(t => t.id !== id));
+	};
+
+	return (
+		<div className=' w-4/5 mx-auto h-screen text-white'>
+			<h1 className=' text-lg mb-2 text-center font-bold'>ToDo App</h1>
+			<ToDoInput setToDo={setToDo} todos={todos} />
+			<ToDoList todos={todos} changeToDo={changeToDo} removeToDo={removeToDo} />
+		</div>
+	);
 }
 
 export default App;
